@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -18,5 +19,64 @@ namespace Controllers
         {
             Context = context;
         }
+        [Route("DajLekare")]
+        [HttpGet]
+        public async Task<ActionResult> DajLekare()
+        {
+            try
+            {
+                return Ok(await Context.Lekar.Select(p =>
+                new
+                {
+                    ID = p.ID,
+                    Ime = p.Ime,
+                    Prezime = p.Prezime,
+                    Bolnice = p.Bolnice
+                }).ToListAsync());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("DodajLekara/{ime}/{prezime}")]
+        [HttpPost]
+        public async Task<ActionResult> DodajLekara(string ime,string prezime)
+        {
+            try
+            {
+                if(ime.Length>20 || ime.Length<3) return BadRequest("Neispravno ime.");
+                if(prezime.Length>20 || prezime.Length<3) return BadRequest("Neispravno prezime.");
+                Lekar lekar = new Lekar();
+                lekar.Ime = ime;
+                lekar.Prezime = prezime;
+                lekar.Bolnice = new List<Bolnica>();
+                Context.Lekar.Add(lekar);
+                await Context.SaveChangesAsync();
+                return Ok("Lekar je dodat!");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+/*
+        [Route("UkloniLekara/{id}")]
+        [HttpDelete]
+        public async Task<ActionResult> UkloniLekara(int id)//dodeli druge lekare pacijentima ili zabrani brisanje samo
+        {
+            try
+            {
+                var lekar = await Context.Lekar.Include(p => p.Bolnice).Where(p => p.ID == id).FirstOrDefaultAsync();
+                if(lekar==null) BadRequest("Nepostojeci lekar.");
+                Context.Lekar.Remove(lekar);
+                await Context.SaveChangesAsync();
+                return Ok("Uklonjen je lekar.");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }*/
     }
 }
