@@ -5,4 +5,5 @@ export class Bolnica{
         this.lekari = lekari;
         this.brojMesta = brojMesta;
     }
+    
 }
