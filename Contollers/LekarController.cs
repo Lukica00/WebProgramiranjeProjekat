@@ -31,7 +31,49 @@ namespace Controllers
                     ID = p.ID,
                     Ime = p.Ime,
                     Prezime = p.Prezime,
-                    Bolnice = p.Bolnice
+                    Bolnice = p.Bolnice.Count,
+                    Pacijenti = (Context.Lecenje.Where(q=>q.Lekar==p).Where(w=>w.Kraj==DateTime.MinValue).ToList()).Count
+                }).ToListAsync());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("DajNezaposljeneLekare/{idBolnice}")]
+        [HttpGet]
+        public async Task<ActionResult> DajNezaposljeneLekare(int idBolnice)
+        {
+            try
+            {
+                var bolnica = await Context.Bolnica.Where(p=>p.ID == idBolnice).FirstOrDefaultAsync();
+                return Ok(await Context.Lekar.Where(q=>!q.Bolnice.Contains(bolnica)).Select(p =>
+                new
+                {
+                    ID = p.ID,
+                    Ime = p.Ime,
+                    Prezime = p.Prezime
+                }).ToListAsync());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("DajZaposljeneLekare/{idBolnice}")]
+        [HttpGet]
+        public async Task<ActionResult> DajZaposljeneLekare(int idBolnice)
+        {
+            try
+            {
+                var bolnica = await Context.Bolnica.Where(p=>p.ID == idBolnice).FirstOrDefaultAsync();
+                return Ok(await Context.Lekar.Where(q=>q.Bolnice.Contains(bolnica)).Select(p =>
+                new
+                {
+                    ID = p.ID,
+                    Ime = p.Ime,
+                    Prezime = p.Prezime,
+                    Pacijenti = (Context.Lecenje.Where(q=>q.Lekar==p).Where(w=>w.Bolnica==bolnica).ToList()).Count
                 }).ToListAsync());
             }
             catch (Exception e)

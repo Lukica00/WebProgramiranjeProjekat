@@ -11,28 +11,128 @@
     <div>
         <h1>Zdravstveni sistem</h1>
     </div>
-    <div id="bolniceSadrzaj">
-        <div id="bolnicaTabs" class="horFlex">
 
+    <div id="dodajBolnicuSadrzaj" class="sadrzaj">
+        <h2>Dodaj bolnicu</h2>
+        <input type="text" id="bolnicaIme">
+        <input type="number" min="6" max="20" id="bolnicaBroj">
+        <button id="dodajBolnicu">Dodaj</button>
+    </div>
+    <div id="bolnicaSadrzaj" class="sadrzaj flexWrap">
+        <div>
+            <h2></h2>
+            <input type="text" id="imeBolnica">
+            <button id="dugmePreimenujBolnicu">Preimenuj</button>
+            <button id="dugmeObrisiBolnicu">Obrisi</button>
+            <h3></h3>
+            <label for="zaposli">Zaposli:</label>
+            <select name="zaposli" id="zaposliBolnica">
+            </select>
+            <button id="dugmeZaposli">Zaposli</button>
+            <table id="bolnicaTabela">
+                <tr id="bolnicaTabelaNaslov">
+                    <td>Ime</td>
+                    <td>Prezime</td>
+                    <td>Br. Pacijenata</td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            desi
         </div>
     </div>
-    <div id="lekariSadrzaj">
-
+    <div id="lekariSadrzaj" class="sadrzaj">
+        <h2>Lekari</h2>
+        <input type="text" id="lekarIme">
+        <input type="text" id="lekarPrezime">
+        <button id="dodajLekara">Dodaj</button>
+        <table id="lekari">
+            <tr id="lekariNaslov">
+                <td>Ime</td>
+                <td>Prezime</td>
+                <td>Br. Bolnica</td>
+                <td>Br. Pacijenata</td>
+            </tr>
+        </table>
     </div>
-    <div id="pacijentiSadrzaj">
-
+    <div id="pacijentiSadrzaj" class="sadrzaj">
+        <h2>Pacijenti</h2>
+        <input type="text" id="pacijentJmbg">
+        <input type="text" id="pacijentIme">
+        <input type="text" id="pacijentPrezime">
+        <button id="dodajPacijenta">Dodaj</button>
+        <table id="pacijenti">
+            <tr id="pacijentiNaslov">
+                <td>JMBG</td>
+                <td>Ime</td>
+                <td>Prezime</td>
+                <td>Akcija</td>
+            </tr>
+        </table>
+        <table id="bolovanja">
+            <tr id="bolovanjaNaslov">
+                <td>Pocetak</td>
+                <td>Kraj</td>
+                <td>Bolnica</td>
+                <td>Lekar</td>
+                <td>Soba</td>
+            </tr>
+        </table>
     </div>
     <div id="tabs" class="tabs horFlex">
-        <div class="tab">
+        <div id="lekariTab" class="tab">
             <h2>Lekari</h2>
         </div>
         <div id="bolnicaTab" class="tab bolnicaTab">
             <h2>Bolnice</h2>
+            <p id="otvoriDodajBolnicu">Dodaj bolnicu</p>
+            <div id="meniBolnice"></div>
         </div>
-        <div class="tab">
+        <div id="pacijentiTab" class="tab">
             <h2>Pacijenti</h2>
         </div>
     </div>
+    <template id="lekariSema">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+    <template id="bolovanjaSema">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+    <template id="pacijentiSema">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button>Obrisi</button>
+            </td>
+        </tr>
+    </template>
+    <template id="semaBolnica">
+        <option></option>
+    </template>
+    <template id="semaBolnicaLekari">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                <button>
+                    Otpusti
+                </button>
+            </td>
+        </tr>
+    </template>
     <script src="index.js" type="module"></script>
 </body>
 

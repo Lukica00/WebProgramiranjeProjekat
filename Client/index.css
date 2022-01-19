@@ -36,3 +36,14 @@ body{
     left:25%;
     align-items: flex-end;
 }
+
+#lekariSadrzaj, #pacijentiSadrzaj, #dodajBolnicuSadrzaj{
+    display: none;
+}
+.flexWrap{
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

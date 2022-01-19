@@ -19,19 +19,20 @@ namespace Controllers
         {
             Context = context;
         }
-        [Route("DajBolovanja")]
+        [Route("DajBolovanja/{idPacijenta}")]
         [HttpGet]
-        public async Task<ActionResult> DajBolovanja()
+        public async Task<ActionResult> DajBolovanja(int idPacijenta)
         {
             try
             {
-                return Ok(await Context.Lecenje.Select(p =>
+                var pacijent = await Context.Pacijent.Where(p=>p.ID == idPacijenta).FirstOrDefaultAsync();
+                return Ok(await Context.Lecenje.Where(p => p.Pacijent==pacijent).Select(p =>
                 new
                 {
                     ID = p.ID,
                     Pocetak = p.Pocetak,
                     Kraj = p.Kraj,
-                    Pacijent = p.Pacijent,
+                    //Pacijent = p.Pacijent,
                     Bolnica = p.Bolnica,
                     Lekar = p.Lekar,
                     Soba = p.SobaID
