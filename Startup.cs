@@ -51,7 +51,7 @@ namespace WebProgramiranjeProjekat
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Proba", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Zdravstvo", Version = "v1" });
             });
         }
 

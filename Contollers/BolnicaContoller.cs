@@ -176,6 +176,8 @@ namespace Controllers
                 foreach (Lecenje bolovanje in bolovanja)
                 {
                     bolovanje.Bolnica = null;
+                    if(bolovanje.Kraj==DateTime.MinValue)
+                        bolovanje.Kraj = DateTime.Now;
                     Context.Lecenje.Update(bolovanje);
                 }
                 Context.Bolnica.Remove(bolnica);

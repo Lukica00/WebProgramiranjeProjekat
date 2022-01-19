@@ -1,0 +1,38 @@
+body{
+    margin: auto;
+    width: 80%;
+}
+.horFlex{
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.tab{
+    height: 5vh;
+    width: 30%;
+
+
+    border-top-left-radius: 2.5vmin;
+    border-top-right-radius: 2.5vmin;
+
+    background: rgb(186, 186, 186);
+    overflow: hidden;
+    z-index: 500;
+    
+    transition: all 0.3s;
+}
+.tab:hover{
+    background-color: aqua;
+}
+
+.bolnicaTab:hover{
+    height: auto;
+}
+.tabs{
+    position: absolute;
+    bottom: 0vh;
+    left:25%;
+    align-items: flex-end;
+}
