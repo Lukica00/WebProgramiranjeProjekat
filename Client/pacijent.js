@@ -1,5 +1,5 @@
 import { Lecenje } from "./lecenje.js";
-import { err, drawTabela } from "./include.js";
+import { err, drawTabela, fec } from "./include.js";
 export class Pacijent {
 
     constructor(id, jmbg, ime, prezime) {
@@ -8,29 +8,42 @@ export class Pacijent {
         this.prezime = prezime;
         this.jmbg = jmbg;
     }
-    draw(element, imeSeme) {
-        const polje = drawTabela(imeSeme, 3, this);
-        polje.firstElementChild.id = "pacijent" + this.id;
-        polje.firstElementChild.onclick = () => {
-            fetch("https://localhost:5001/Lecenje/DajBolovanja/" + this.id).then(res => {
-                res.json().then(rres => {
-                    console.log(rres);
-                    const tabelaBol = document.getElementById("bolovanja")
-                    const naslov = document.getElementById("bolovanjaNaslov");
-                    tabelaBol.replaceChildren(naslov);
-                    rres.forEach(lecenje => {
-                        let lec = new Lecenje(lecenje.id, lecenje.pocetak, lecenje.kraj, lecenje.bolnica, lecenje.lekar, lecenje.soba);
-                        lec.draw(tabelaBol);
-                    });
-                }, err);
-            }, err);
-        };
-        const button = polje.querySelector("button");
-        button.onclick = () => {
-            fetch("https://localhost:5001/Pacijent/ObrisiPacijenta/" + this.id, { method: "DELETE" }).then(res => {
-                document.getElementById("pacijent" + this.id).remove();
-            }, err);
-        };
-        element.appendChild(polje);
+    draw(element) {
+        const tr = document.createElement("tr");
+        tr.id = "pacijent" + this.id;
+        tr.addEventListener("click", () => {
+            fec("/Lecenje/DajBolovanja/" + this.id, "GET", lecenja => {
+                const tabelaBol = document.getElementById("pacijentiBolovanja")
+                const naslov = document.getElementById("pacijentiBolovanjaNaslov");
+                tabelaBol.replaceChildren(naslov);
+                lecenja.forEach(lecenje => {
+                    let lec = new Lecenje(lecenje.id, lecenje.pocetak, lecenje.kraj, lecenje.bolnica, lecenje.lekar, lecenje.soba);
+                    lec.draw(tabelaBol);
+                });
+            })
+        });
+
+        let td = document.createElement("td");
+        td.innerHTML = this.ime;
+        tr.appendChild(td);
+
+        td = document.createElement("td");
+        td.innerHTML = this.prezime;
+        tr.appendChild(td);
+
+        td = document.createElement("td");
+        td.innerHTML = this.jmbg;
+        tr.appendChild(td);
+
+        td = document.createElement("td");
+        const dugme = document.createElement("button");
+        dugme.innerHTML = "Obrisi";
+        dugme.addEventListener("click", () => fec("/Pacijent/ObrisiPacijenta/" + this.id, "DELETE", () =>
+            document.getElementById("pacijent" + this.id).remove())
+        );
+        td.appendChild(dugme);
+        tr.appendChild(td);
+
+        element.appendChild(tr);
     }
 }

@@ -31,7 +31,31 @@ namespace Controllers
                     ID = p.ID,
                     Ime = p.Ime,
                     BrojMesta = p.BrMesta,
-                    Lekari = p.Lekari
+                    Lekari = p.Lekari,
+                    ZauzeteSobe = (Context.Lecenje.Where(q=>q.Bolnica==p).Where(w=>w.Kraj==DateTime.MinValue).Select(t => t.SobaID)).ToList()
+                }).ToListAsync());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("DajLekaruBolnice/{idLekara}")]
+        [HttpGet]
+        public async Task<ActionResult> DajLekaruBolnice(int idLekara)//Dobar
+        {
+            try
+            {
+                var lekar = await Context.Lekar.Where(p => p.ID == idLekara).FirstOrDefaultAsync();
+                if (lekar == null)
+                {
+                    return BadRequest("Nepostojeci lekar.");
+                }
+                return Ok(await Context.Bolnica.Where(p => p.Lekari.Contains(lekar)).Select(p =>
+                new
+                {
+                    ID = p.ID,
+                    Ime = p.Ime,
                 }).ToListAsync());
             }
             catch (Exception e)
@@ -94,7 +118,7 @@ namespace Controllers
         }
         [Route("OtpustiLekara/{idBolnice}/{idLekara}")]
         [HttpPut]
-        public async Task<ActionResult> OtpustiLekara(int idBolnice, int idLekara)//dobar
+        public async Task<ActionResult> OtpustiLekara(int idBolnice, int idLekara)//Dobar
         {
             try
             {
@@ -135,7 +159,7 @@ namespace Controllers
         }
         [Route("PreimenujBolnicu/{idBolnice}/{imeBolnice}")]
         [HttpPut]
-        public async Task<ActionResult> PreimenujBolnicu(int idBolnice, string imeBolnice)//dobar
+        public async Task<ActionResult> PreimenujBolnicu(int idBolnice, string imeBolnice)//Dobar
         {
             try
             {
@@ -176,7 +200,7 @@ namespace Controllers
                 foreach (Lecenje bolovanje in bolovanja)
                 {
                     bolovanje.Bolnica = null;
-                    if(bolovanje.Kraj==DateTime.MinValue)
+                    if (bolovanje.Kraj == DateTime.MinValue)
                         bolovanje.Kraj = DateTime.Now;
                     Context.Lecenje.Update(bolovanje);
                 }

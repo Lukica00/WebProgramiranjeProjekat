@@ -40,6 +40,19 @@ namespace Controllers
                 return BadRequest(e.Message);
             }
         }
+        [Route("DajZdravePacijente")]
+        [HttpGet]
+        public async Task<ActionResult> DajZdravePacijente()
+        {
+            try
+            {
+                return Ok(await Context.Pacijent.Where(p=>!(Context.Lecenje.Where(w=>w.Kraj==DateTime.MinValue).Select(q=>q.Pacijent).ToList()).Contains(p)).ToListAsync());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
         [Route("DodajPacijenta/{ime}/{prezime}/{JMBG}")]
         [HttpPost]
         public async Task<ActionResult> DodajPacijenta(string ime, string prezime, string JMBG)
@@ -65,7 +78,7 @@ namespace Controllers
         }
         [Route("ObrisiPacijenta/{id}")]
         [HttpDelete]
-        public async Task<ActionResult> DodajPacijenta(int id)
+        public async Task<ActionResult> ObrisiPacijenta(int id)
         {
             try
             {

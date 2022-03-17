@@ -12,23 +12,23 @@
         <h1>Zdravstveni sistem</h1>
     </div>
 
-    <div id="dodajBolnicuSadrzaj" class="sadrzaj">
+    <div id="dodajBolnicuStranica" class="stranica">
         <h2>Dodaj bolnicu</h2>
-        <input type="text" id="bolnicaIme">
-        <input type="number" min="6" max="20" id="bolnicaBroj">
-        <button id="dodajBolnicu">Dodaj</button>
+        <input type="text" id="bolnicaImeDodaj">
+        <input type="number" min="6" max="20" id="bolnicaBrojDodaj">
+        <button id="bolnicaDodaj">Dodaj</button>
     </div>
-    <div id="bolnicaSadrzaj" class="sadrzaj flexWrap">
-        <div>
+    <div id="bolnicaStranica" class="stranica flexWrap">
+        <div class="levi">
             <h2></h2>
-            <input type="text" id="imeBolnica">
-            <button id="dugmePreimenujBolnicu">Preimenuj</button>
-            <button id="dugmeObrisiBolnicu">Obrisi</button>
+            <input type="text" id="bolnicaIme">
+            <button id="bolnicaPreimenuj">Preimenuj</button>
+            <button id="bolnicaObrisi">Obrisi</button>
             <h3></h3>
             <label for="zaposli">Zaposli:</label>
-            <select name="zaposli" id="zaposliBolnica">
+            <select name="zaposli" id="bolnicaZaposliIme">
             </select>
-            <button id="dugmeZaposli">Zaposli</button>
+            <button id="bolnicaZaposli">Zaposli</button>
             <table id="bolnicaTabela">
                 <tr id="bolnicaTabelaNaslov">
                     <td>Ime</td>
@@ -37,102 +37,91 @@
                 </tr>
             </table>
         </div>
-        <div>
-            desi
+        <div class="desni">
+            <div id="bolnicaSobe" class="gornji">
+                
+            </div>
+            <div id="bolnicaBolovanja" class="donji">
+            
+            </div>
         </div>
     </div>
-    <div id="lekariSadrzaj" class="sadrzaj">
-        <h2>Lekari</h2>
-        <input type="text" id="lekarIme">
-        <input type="text" id="lekarPrezime">
-        <button id="dodajLekara">Dodaj</button>
-        <table id="lekari">
-            <tr id="lekariNaslov">
-                <td>Ime</td>
-                <td>Prezime</td>
-                <td>Br. Bolnica</td>
-                <td>Br. Pacijenata</td>
-            </tr>
-        </table>
+    <div id="lekariStranica" class="stranica">
+        <div class="levi">
+            <h2>Lekari</h2>
+            <input type="text" id="lekarIme">
+            <input type="text" id="lekarPrezime">
+            <button id="lekarDodaj">Dodaj</button>
+            <table id="lekari">
+                <tr id="lekariNaslov">
+                    <td>Ime</td>
+                    <td>Prezime</td>
+                    <td>Br. Bolnica</td>
+                    <td>Br. Pacijenata</td>
+                </tr>
+            </table>
+        </div>
+        <div class="desni">
+            <div class="gornji">
+                <table id="lekariBolnice">
+                    <tr id="lekariBolniceNaslov">
+                        <td>Ime</td>
+                        <td>Broj Soba</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="donji">
+            
+            </div>
+        </div>
     </div>
-    <div id="pacijentiSadrzaj" class="sadrzaj">
-        <h2>Pacijenti</h2>
-        <input type="text" id="pacijentJmbg">
-        <input type="text" id="pacijentIme">
-        <input type="text" id="pacijentPrezime">
-        <button id="dodajPacijenta">Dodaj</button>
-        <table id="pacijenti">
-            <tr id="pacijentiNaslov">
-                <td>JMBG</td>
-                <td>Ime</td>
-                <td>Prezime</td>
-                <td>Akcija</td>
-            </tr>
-        </table>
-        <table id="bolovanja">
-            <tr id="bolovanjaNaslov">
-                <td>Pocetak</td>
-                <td>Kraj</td>
-                <td>Bolnica</td>
-                <td>Lekar</td>
-                <td>Soba</td>
-            </tr>
-        </table>
+    <div id="pacijentiStranica" class="stranica">
+        <div class="levi">
+            <h2>Pacijenti</h2>
+            <input type="text" id="pacijentJmbg">
+            <input type="text" id="pacijentIme">
+            <input type="text" id="pacijentPrezime">
+            <button id="pacijentDodaj">Dodaj</button>
+            <table id="pacijenti">
+                <tr id="pacijentiNaslov">
+                    <td>JMBG</td>
+                    <td>Ime</td>
+                    <td>Prezime</td>
+                    <td>Akcija</td>
+                </tr>
+            </table>
+        </div>
+        <div class="desni">
+            <div class="gornji">
+                <table id="pacijentiBolovanja">
+                    <tr id="pacijentiBolovanjaNaslov">
+                        <td>Pocetak</td>
+                        <td>Kraj</td>
+                        <td>Bolnica</td>
+                        <td>Lekar</td>
+                        <td>Soba</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="donji">
+            
+            </div>
+        </div>
     </div>
-    <div id="tabs" class="tabs horFlex">
+
+    <div id="tabovi" class="tabovi horFlex">
         <div id="lekariTab" class="tab">
             <h2>Lekari</h2>
         </div>
         <div id="bolnicaTab" class="tab bolnicaTab">
             <h2>Bolnice</h2>
-            <p id="otvoriDodajBolnicu">Dodaj bolnicu</p>
-            <div id="meniBolnice"></div>
+            <p id="dodajBolnicuTab">Dodaj bolnicu</p>
+            <div id="bolnicaMeni"></div>
         </div>
         <div id="pacijentiTab" class="tab">
             <h2>Pacijenti</h2>
         </div>
     </div>
-    <template id="lekariSema">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </template>
-    <template id="bolovanjaSema">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </template>
-    <template id="pacijentiSema">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button>Obrisi</button>
-            </td>
-        </tr>
-    </template>
-    <template id="semaBolnica">
-        <option></option>
-    </template>
-    <template id="semaBolnicaLekari">
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td>
-                <button>
-                    Otpusti
-                </button>
-            </td>
-        </tr>
-    </template>
     <script src="index.js" type="module"></script>
 </body>
 

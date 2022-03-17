@@ -30,14 +30,14 @@ body{
 .bolnicaTab:hover{
     height: auto;
 }
-.tabs{
+.tabovi{
     position: absolute;
     bottom: 0vh;
     left:25%;
     align-items: flex-end;
 }
 
-#lekariSadrzaj, #pacijentiSadrzaj, #dodajBolnicuSadrzaj{
+.stranica{
     display: none;
 }
 .flexWrap{
@@ -46,4 +46,23 @@ body{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+#holderZaSobe{
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+
+}
+.redSoba{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.redSoba>button{
+    width: 40%;
+    margin: auto;
+}
+.crven{
+    background-color: red;
 }
