@@ -5,6 +5,6 @@ Projekat je zdravstveni sistem. U sistemu su bolnice, lekari, pacijenti kao i bo
 Moguće je dodati lekara, zaposliti ga u više bolnica i otpustiti ga.
 Pacijente je moguće dodati, ukloniti i staviti ih na lečenje.
 Bolnice je moguće otvoriti, zatvoriti i preimenovati.
-[Pregled pacijenata](slika1.png)
-[Pregled bolnica](slika2.png)
-[Lekari](slika3.png)
+![Pregled pacijenata](slika1.png)
+![Pregled bolnica](slika2.png)
+![Lekari](slika3.png)
