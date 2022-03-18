@@ -22,7 +22,7 @@ namespace Controllers
 
         [Route("DajPacijente")]
         [HttpGet]
-        public async Task<ActionResult> DajPacijente()
+        public async Task<ActionResult> DajPacijente()//Dobar
         {
             try
             {
@@ -42,11 +42,11 @@ namespace Controllers
         }
         [Route("DajZdravePacijente")]
         [HttpGet]
-        public async Task<ActionResult> DajZdravePacijente()
+        public async Task<ActionResult> DajZdravePacijente()//Dobar
         {
             try
             {
-                return Ok(await Context.Pacijent.Where(p=>!(Context.Lecenje.Where(w=>w.Kraj==DateTime.MinValue).Select(q=>q.Pacijent).ToList()).Contains(p)).ToListAsync());
+                return Ok(await Context.Pacijent.Where(p => !(Context.Lecenje.Where(w => w.Kraj == DateTime.MinValue).Select(q => q.Pacijent).ToList()).Contains(p)).ToListAsync());
             }
             catch (Exception e)
             {
@@ -55,14 +55,17 @@ namespace Controllers
         }
         [Route("DodajPacijenta/{ime}/{prezime}/{JMBG}")]
         [HttpPost]
-        public async Task<ActionResult> DodajPacijenta(string ime, string prezime, string JMBG)
+        public async Task<ActionResult> DodajPacijenta(string ime, string prezime, string JMBG)//Dobar
         {
             try
             {
-                if (ime.Length > 20 || ime.Length < 3) return BadRequest("Neispravno ime.");
-                if (prezime.Length > 20 || prezime.Length < 3) return BadRequest("Neispravno prezime.");
+
                 var rgx = new Regex("^[0-9]+$");
                 if (!rgx.IsMatch(JMBG) || JMBG.Length != 13) return BadRequest("Neispravan JMBG.");
+                rgx = new Regex(@"^\p{L}+$");
+                if (ime.Length > 20 || ime.Length < 3 || (!rgx.IsMatch(ime))) return BadRequest("Neispravno ime.");
+                if (prezime.Length > 20 || prezime.Length < 3 || (!rgx.IsMatch(prezime))) return BadRequest("Neispravno prezime.");
+                if (Context.Pacijent.Where(p => p.JMBG == JMBG).ToList().Count != 0) return BadRequest("Već postoji pacijent sa tim JMBG.");
                 var pacijent = new Pacijent();
                 pacijent.Ime = ime;
                 pacijent.Prezime = prezime;
@@ -78,7 +81,7 @@ namespace Controllers
         }
         [Route("ObrisiPacijenta/{id}")]
         [HttpDelete]
-        public async Task<ActionResult> ObrisiPacijenta(int id)
+        public async Task<ActionResult> ObrisiPacijenta(int id)//Dobar
         {
             try
             {

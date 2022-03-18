@@ -1,0 +1,17 @@
+table{
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border: 3px solid var(--boja3);
+}
+th, td{
+    border: 3px solid var(--boja3);
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+th{
+    background-color: var(--boja3);
+}
+tr:hover{
+    background-color: var(--boja3);
+}

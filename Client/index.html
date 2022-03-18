@@ -5,121 +5,137 @@
     <meta charset="UTF-8">
     <title>Zdravstveni sistem</title>
     <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="smolskrin.css">
+    <link rel="stylesheet" href="tabovi.css">
+    <link rel="stylesheet" href="tablica.css">
 </head>
 
 <body>
     <div>
-        <h1>Zdravstveni sistem</h1>
+        <h1>ZDRAVSTVENI SISTEM</h1>
     </div>
-
-    <div id="dodajBolnicuStranica" class="stranica">
-        <h2>Dodaj bolnicu</h2>
-        <input type="text" id="bolnicaImeDodaj">
-        <input type="number" min="6" max="20" id="bolnicaBrojDodaj">
-        <button id="bolnicaDodaj">Dodaj</button>
+    <div id="tabovi" class="horFlex">
+        <div id="lekariTab" class="tab lev">
+            <h2>LEKARI</h2>
+        </div>
+        <div id="bolnicaTab" class="tab centar">
+            <h2>BOLNICE</h2>
+        </div>
+        <div id="pacijentiTab" class="tab desan">
+            <h2>PACIJENTI</h2>
+        </div>
     </div>
-    <div id="bolnicaStranica" class="stranica flexWrap">
-        <div class="levi">
-            <h2></h2>
-            <input type="text" id="bolnicaIme">
-            <button id="bolnicaPreimenuj">Preimenuj</button>
-            <button id="bolnicaObrisi">Obrisi</button>
-            <h3></h3>
-            <label for="zaposli">Zaposli:</label>
-            <select name="zaposli" id="bolnicaZaposliIme">
-            </select>
-            <button id="bolnicaZaposli">Zaposli</button>
-            <table id="bolnicaTabela">
-                <tr id="bolnicaTabelaNaslov">
-                    <td>Ime</td>
-                    <td>Prezime</td>
-                    <td>Br. Pacijenata</td>
+    <div id="bolnicaStranica" class="stranica">
+        <div class="kocka gornji ">
+            <div class="horFlex">
+                <h2>Bolnice</h2>
+                <div class="horDiv">
+                    <input type="text" id="bolnicaImeDodaj" placeholder="Ime bolnice">
+                    <input type="number" min="6" max="20" id="bolnicaBrojDodaj" placeholder="Broj mesta">
+                    <button id="bolnicaDodaj">Dodaj bolnicu</button>
+                </div>
+            </div>
+            <table id="bolnicaTabelaBolnice">
+                <tr id="bolnicaTabelaBolniceNaslov">
+                    <th>Ime</th>
+                    <th>Broj Mesta</th>
+                    <th>Zauzeta Mesta</th>
                 </tr>
             </table>
         </div>
-        <div class="desni">
-            <div id="bolnicaSobe" class="gornji">
-                
+        <div class="kocka donji nestani lekari">
+            <div class="horFlex">
+                <h2></h2>
+                <div class="horDiv">
+                    <input type="text" id="bolnicaIme" placeholder="Novo ime">
+                    <button id="bolnicaPreimenuj">Preimenuj</button>
+                    <button id="bolnicaObrisi">Obriši Bolnicu</button>
+                </div>
             </div>
-            <div id="bolnicaBolovanja" class="donji">
-            
+            <div class="horFlex">
+                <h3></h3>
+                <div class="horDiv">
+                    <select name="zaposli" id="bolnicaZaposliIme">
+                    </select>
+                    <button id="bolnicaZaposli">Zaposli lekara</button>
+                </div>
             </div>
+            <h2>Lekari </h2>
+            <table id="bolnicaTabela">
+                <tr id="bolnicaTabelaNaslov">
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Br. Pacijenata</th>
+                    <th>Akcija</th>
+                </tr>
+            </table>
+        </div>
+        <div id="bolnicaSobe" class="kocka gornji nestani sobe">
+
+        </div>
+        <div id="bolnicaBolovanja" class="kocka donji nestani bolovanja">
         </div>
     </div>
     <div id="lekariStranica" class="stranica">
-        <div class="levi">
-            <h2>Lekari</h2>
-            <input type="text" id="lekarIme">
-            <input type="text" id="lekarPrezime">
-            <button id="lekarDodaj">Dodaj</button>
+        <div class="kocka levi">
+            <div class="horFlex">
+                <h2>Lekari</h2>
+                <div class="horDiv">
+                    <input type="text" id="lekarIme" placeholder="Ime">
+                    <input type="text" id="lekarPrezime" placeholder="Prezime">
+                    <button id="lekarDodaj">Dodaj</button>
+                </div>
+            </div>
             <table id="lekari">
                 <tr id="lekariNaslov">
-                    <td>Ime</td>
-                    <td>Prezime</td>
-                    <td>Br. Bolnica</td>
-                    <td>Br. Pacijenata</td>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Br. Bolnica</th>
+                    <th>Br. Pacijenata</th>
                 </tr>
             </table>
         </div>
-        <div class="desni">
-            <div class="gornji">
-                <table id="lekariBolnice">
-                    <tr id="lekariBolniceNaslov">
-                        <td>Ime</td>
-                        <td>Broj Soba</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="donji">
-            
-            </div>
+        <div class="kocka desni">
+            <h2>Bolnice u kojima rade</h2>
+            <table id="lekariBolnice">
+                <tr id="lekariBolniceNaslov">
+                    <th>Ime</th>
+                    <th>Broj Pacijenata</th>
+                </tr>
+            </table>
         </div>
     </div>
     <div id="pacijentiStranica" class="stranica">
-        <div class="levi">
-            <h2>Pacijenti</h2>
-            <input type="text" id="pacijentJmbg">
-            <input type="text" id="pacijentIme">
-            <input type="text" id="pacijentPrezime">
-            <button id="pacijentDodaj">Dodaj</button>
+        <div class="kocka levi">
+            <div class="horFlex">
+                <h2>Pacijenti</h2>
+                <div class="horDiv">
+                    <input type="text" id="pacijentJmbg" placeholder="JMBG">
+                    <input type="text" id="pacijentIme" placeholder="Ime">
+                    <input type="text" id="pacijentPrezime" placeholder="Prezime">
+                    <button id="pacijentDodaj">Dodaj</button>
+                </div>
+            </div>
             <table id="pacijenti">
                 <tr id="pacijentiNaslov">
-                    <td>JMBG</td>
-                    <td>Ime</td>
-                    <td>Prezime</td>
-                    <td>Akcija</td>
+                    <th>JMBG</th>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Akcija</th>
                 </tr>
             </table>
         </div>
-        <div class="desni">
-            <div class="gornji">
-                <table id="pacijentiBolovanja">
-                    <tr id="pacijentiBolovanjaNaslov">
-                        <td>Pocetak</td>
-                        <td>Kraj</td>
-                        <td>Bolnica</td>
-                        <td>Lekar</td>
-                        <td>Soba</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="donji">
-            
-            </div>
-        </div>
-    </div>
-
-    <div id="tabovi" class="tabovi horFlex">
-        <div id="lekariTab" class="tab">
-            <h2>Lekari</h2>
-        </div>
-        <div id="bolnicaTab" class="tab bolnicaTab">
-            <h2>Bolnice</h2>
-            <p id="dodajBolnicuTab">Dodaj bolnicu</p>
-            <div id="bolnicaMeni"></div>
-        </div>
-        <div id="pacijentiTab" class="tab">
-            <h2>Pacijenti</h2>
+        <div class="kocka desni">
+            <h2>Bolovanja</h2>
+            <table id="pacijentiBolovanja">
+                <tr id="pacijentiBolovanjaNaslov">
+                    <th>Pocetak</th>
+                    <th>Kraj</th>
+                    <th>Bolnica</th>
+                    <th>Lekar</th>
+                    <th>Soba</th>
+                </tr>
+            </table>
         </div>
     </div>
     <script src="index.js" type="module"></script>

@@ -1,5 +1,5 @@
 import { Lecenje } from "./lecenje.js";
-import { err, drawTabela, fec } from "./include.js";
+import { fec } from "./include.js";
 export class Pacijent {
 
     constructor(id, jmbg, ime, prezime) {
@@ -24,15 +24,15 @@ export class Pacijent {
         });
 
         let td = document.createElement("td");
+        td.innerHTML = this.jmbg;
+        tr.appendChild(td);
+
+        td = document.createElement("td");
         td.innerHTML = this.ime;
         tr.appendChild(td);
 
         td = document.createElement("td");
         td.innerHTML = this.prezime;
-        tr.appendChild(td);
-
-        td = document.createElement("td");
-        td.innerHTML = this.jmbg;
         tr.appendChild(td);
 
         td = document.createElement("td");

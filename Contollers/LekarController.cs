@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +22,7 @@ namespace Controllers
         }
         [Route("DajLekare")]
         [HttpGet]
-        public async Task<ActionResult> DajLekare()
+        public async Task<ActionResult> DajLekare()//Dobar
         {
             try
             {
@@ -32,7 +33,6 @@ namespace Controllers
                     Ime = p.Ime,
                     Prezime = p.Prezime,
                     Bolnice = p.Bolnice.Select(t => t.ID).ToList(),
-                    //Bolnice = p.Bolnice.Count,
                     Pacijenti = Context.Lecenje.Where(q => q.Lekar == p).Where(w => w.Kraj == DateTime.MinValue).Select(t => t.ID).ToList()
                 }).ToListAsync());
             }
@@ -43,11 +43,12 @@ namespace Controllers
         }
         [Route("DajNezaposljeneLekare/{idBolnice}")]
         [HttpGet]
-        public async Task<ActionResult> DajNezaposljeneLekare(int idBolnice)
+        public async Task<ActionResult> DajNezaposljeneLekare(int idBolnice)//Dobar
         {
             try
             {
                 var bolnica = await Context.Bolnica.Where(p => p.ID == idBolnice).FirstOrDefaultAsync();
+                if (bolnica == null) return BadRequest("Nepostojeća bolnica.");
                 return Ok(await Context.Lekar.Where(q => !q.Bolnice.Contains(bolnica)).Select(p =>
                   new
                   {
@@ -63,11 +64,12 @@ namespace Controllers
         }
         [Route("DajZaposljeneLekare/{idBolnice}")]
         [HttpGet]
-        public async Task<ActionResult> DajZaposljeneLekare(int idBolnice)
+        public async Task<ActionResult> DajZaposljeneLekare(int idBolnice)//Dobar
         {
             try
             {
                 var bolnica = await Context.Bolnica.Where(p => p.ID == idBolnice).FirstOrDefaultAsync();
+                if (bolnica == null) return BadRequest("Nepostojeća bolnica.");
                 return Ok(await Context.Lekar.Where(q => q.Bolnice.Contains(bolnica)).Select(p =>
                   new
                   {
@@ -84,12 +86,13 @@ namespace Controllers
         }
         [Route("DodajLekara/{ime}/{prezime}")]
         [HttpPost]
-        public async Task<ActionResult> DodajLekara(string ime, string prezime)
+        public async Task<ActionResult> DodajLekara(string ime, string prezime)//Dobar
         {
             try
             {
-                if (ime.Length > 20 || ime.Length < 3) return BadRequest("Neispravno ime.");
-                if (prezime.Length > 20 || prezime.Length < 3) return BadRequest("Neispravno prezime.");
+                var rgx = new Regex(@"^\p{L}+$");
+                if (ime.Length > 20 || ime.Length < 3 || (!rgx.IsMatch(ime))) return BadRequest("Neispravno ime.");
+                if (prezime.Length > 20 || prezime.Length < 3 || (!rgx.IsMatch(prezime))) return BadRequest("Neispravno prezime.");
                 Lekar lekar = new Lekar();
                 lekar.Ime = ime;
                 lekar.Prezime = prezime;
@@ -103,23 +106,5 @@ namespace Controllers
                 return BadRequest(e.Message);
             }
         }
-        /*
-                [Route("UkloniLekara/{id}")]
-                [HttpDelete]
-                public async Task<ActionResult> UkloniLekara(int id)//dodeli druge lekare pacijentima ili zabrani brisanje samo
-                {
-                    try
-                    {
-                        var lekar = await Context.Lekar.Include(p => p.Bolnice).Where(p => p.ID == id).FirstOrDefaultAsync();
-                        if(lekar==null) BadRequest("Nepostojeci lekar.");
-                        Context.Lekar.Remove(lekar);
-                        await Context.SaveChangesAsync();
-                        return Ok("Uklonjen je lekar.");
-                    }
-                    catch (Exception e)
-                    {
-                        return BadRequest(e.Message);
-                    }
-                }*/
     }
 }

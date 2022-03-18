@@ -1,57 +1,86 @@
 body{
     margin: auto;
-    width: 80%;
+    width: 85%;
+    --boja1: #f6d809;
+    --boja2: #f2fffd;
+    --boja3: #93c572;
+    --boja4: #bce08a;
+    --boja5: #569099;
+    --slova: #0c4b0f;
+    
+    box-sizing: border-box;
+    color: var(--slova);
+    background-color: var(--boja2);
+    font-family: Arial, Helvetica, sans-serif;
 }
 .horFlex{
-    width: 50%;
-    margin: 0 auto;
+    margin: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.tab{
-    height: 5vh;
-    width: 30%;
+.horDiv{
+    margin: auto;
+    margin-right: 0%;
+}
 
-
-    border-top-left-radius: 2.5vmin;
-    border-top-right-radius: 2.5vmin;
-
-    background: rgb(186, 186, 186);
-    overflow: hidden;
-    z-index: 500;
+h1{
+    text-align: center;
+    font-size: calc(max(5vh,24pt));
+}
+button{
+    border-style: solid;
+    border-color: var(--boja3);
+    border-radius: 3px;
+    color: var(--slova);
+    background-color: var(--boja1);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+button:disabled{
+    background-color: var(--boja5);
+}
+button:disabled>:hover{
+    background-color: var(--boja5);
+}
+input{
+    background-color: var(--boja4);
     
-    transition: all 0.3s;
+    border-style: solid;
+    border-color: var(--boja3);
+    border-radius: 3px;
 }
-.tab:hover{
-    background-color: aqua;
+select{
+    background-color: var(--boja4);
+    
+    border-style: solid;
+    border-color: var(--boja3);
+    border-radius: 3px;
+    color: var(--slova);
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
-
-.bolnicaTab:hover{
-    height: auto;
+button:hover{
+    background-color: var(--boja2);
+    box-shadow: none;
 }
-.tabovi{
-    position: absolute;
-    bottom: 0vh;
-    left:25%;
-    align-items: flex-end;
-}
-
 .stranica{
     display: none;
-}
-.flexWrap{
     width: 100%;
     margin: 0 auto;
-    display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
-#holderZaSobe{
+#bolnicaSobe{
     display: flex;
     flex-direction: column-reverse;
+}
+.kocka{
+    box-sizing: border-box;
     width: 100%;
-
+    max-width: 700px;
+    padding: 1%;
 }
 .redSoba{
     display: flex;
@@ -61,8 +90,16 @@ body{
 }
 .redSoba>button{
     width: 40%;
+    height: 5vh;
     margin: auto;
+    background-color: var(--boja4);
+}
+.redSoba>button:hover{
+    background-color: var(--boja5)!important;
 }
 .crven{
-    background-color: red;
+    background-color: var(--boja1)!important;
+}
+.zelen{
+    background-color: var(--boja5)!important;
 }

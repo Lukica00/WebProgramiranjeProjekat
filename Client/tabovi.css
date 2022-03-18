@@ -1,0 +1,28 @@
+.tab{
+    height: auto;
+    width: 34%;
+
+    border: solid;
+    border-color: var(--boja3);
+    border-width: 2px;
+
+    background-color: var(--boja4);
+
+    text-align: center;
+    overflow: hidden;
+    z-index: 500;
+    transition: all 0.3s;
+}
+.lev{
+    border-bottom-left-radius: 2.5vmin;
+}
+.desan{
+    border-bottom-right-radius: 2.5vmin;
+}
+.centar{
+    border-left-width: 0;
+    border-right-width: 0;
+}
+.tab:hover{
+    background-color: var(--boja3);
+}

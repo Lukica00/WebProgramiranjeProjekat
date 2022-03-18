@@ -1,9 +1,10 @@
 export class Lecenje {
     constructor(id, pocetak, kraj, bolnica, lekar, soba) {
         this.id = id;
-        this.pocetak = pocetak;
+        let pocetakDate = new Date(pocetak)
+        this.pocetak = pocetakDate.toLocaleDateString();
         let krajDate = new Date(kraj);
-        this.kraj = krajDate.getTime()<new Date(null).getTime()?"/":kraj;
+        this.kraj = krajDate.getTime()<new Date(null).getTime()?"/":krajDate.toLocaleDateString();
         this.bolnica = bolnica?bolnica.ime:"Zatvorena bolnica";
         this.lekar = lekar.ime+" "+lekar.prezime;
         this.soba = soba;

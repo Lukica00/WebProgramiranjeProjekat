@@ -1,4 +1,4 @@
-import { drawTabela, err, fec } from "./include.js";
+import { fec } from "./include.js";
 export class Lekar {
     constructor(id, ime, prezime, bolnice, pacijenti) {
         this.id = id;
@@ -6,24 +6,27 @@ export class Lekar {
         this.prezime = prezime;
         this.bolnice = bolnice;
         this.pacijenti = pacijenti;
-        //this.draw = (element, imeSeme) => element.appendChild(drawTabela(imeSeme, 4, this));
     }
     draw(element) {
         const tr = document.createElement("tr");
-        //tr.id = "lekar" + this.id;
         tr.addEventListener("click", () => {
             fec("/Bolnica/DajLekaruBolnice/" + this.id, "GET", bolnice => {
                 const tabelaBol = document.getElementById("lekariBolnice")
-                const naslov = document.getElementById("lekariBolniceNaslov");
-                tabelaBol.replaceChildren(naslov);
+                const naslovBol = document.getElementById("lekariBolniceNaslov");
+                tabelaBol.replaceChildren(naslovBol);
                 bolnice.forEach(bolnica => {
                     let tr = document.createElement("tr");
                     let td1 = document.createElement("td");
                     td1.innerHTML = bolnica.ime;
-                    tr.onclick = () => {
-                        document.getElementById("meni" + bolnica.id).click();
-                    };
                     tr.appendChild(td1);
+                    
+                    td1 = document.createElement("td");
+                    td1.innerHTML = bolnica.brojSoba;
+                    tr.appendChild(td1);
+
+                    tr.onclick = () => {
+                        document.getElementById("bolnica" + bolnica.id).click();
+                    };
                     tabelaBol.appendChild(tr);
                 });
             })
